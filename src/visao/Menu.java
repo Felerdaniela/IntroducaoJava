@@ -18,14 +18,20 @@ public class Menu {
         System.out.println("1) Cadastro equipamento");
         System.out.println("2) Listagem de equipamentos");
         System.out.println("O que voce deseja fazer?");
-        
         Scanner entrada = new Scanner( System.in );
-        try{
-            int opcao = entrada.nextInt();
-            System.out.println("O usuario digitou "+opcao);
-        }catch(Exception e){
+        int opcao=0;
+        do{
+            try{
+                opcao = Integer.parseInt(entrada.nextLine());
+                System.out.println("O usuario digitou "+opcao);
+                break;
+            }catch(Exception e){
             System.out.println("Nao deu certo porque: "+e.getClass());
+            }
+        }while (opcao!=1 && opcao!=2);
+        if (opcao==1){
+            EquipamentoVisao.exibirFormularioCadastroEquipamento();
         }
     }
-            
 }
+
