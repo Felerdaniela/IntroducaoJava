@@ -5,9 +5,12 @@
  */
 package visao;
 
+import controle.EquipamentoControle;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+import modelo.Equipamento;
 
 /**
  *
@@ -34,7 +37,7 @@ public class EquipamentoVisao {
                 dataAquisicao = formatadorData.parse(entrada.nextLine());
                 break;
             }catch(Exception e){
-                System.out.println("Data invelida");
+                System.out.println("Data invalida");
             }
         }while(true);
         System.out.println("Informe a data de término da garantia: ");
@@ -54,13 +57,44 @@ public class EquipamentoVisao {
         do{
             try{
                 valor = Float.parseFloat(entrada.nextLine());
+                break;
             }catch(Exception e){
                 System.out.println("Valor indalido");
             }
         }while (true);
-        
-        
+            EquipamentoControle.receberDadosCadastroEquipamento(nome, patrimonio, dataAquisicao, dataTerminoGarantia, valor);
+            Menu.exibirMenu();
     }
-            
     
+    public static void exibirListagemEquipamentos(){
+        System.out.println("==== TELA DE LISTAGEM DE EQUIPAMENTOS ====  ");
+        
+        System.out.println("Nome \t NUMERO PATRIMONIO \t NUMERO MANUTENÇôES");
+        
+//        ArrayList<Equipamento> lista= EquipamentoControle.obterListaEquipamentos();
+//        for (int i=0; i < lista.size(); i++){
+//            System.out.println(lista.get(i).getNome()+" \t"+lista.get(i).getDataAquisicao());
+//        }
+        
+        for(Equipamento obj : EquipamentoControle.obterListaEquipamentos()){
+            System.out.println(obj.getNome()+"\t "+obj.getDataAquisicao()+"\t "+obj.getlistaManutencoes().size());
+        }
+        System.out.println("O que deseja fazer?");
+        System.out.println("0) Voltar ao menu");
+        System.out.println("Numero patrimonio) Cadastrar manutençao para o equipamento");
+        Scanner entrada = new Scanner (System.in);
+        String valorDigitado = entrada.nextLine();
+        if (entrada.equals("0")){
+            Menu.exibirMenu();
+        }else{
+           Equipamento encontrado = EquipamentoControle.obterEquipamentoPeloNumeroDoPatrimonio(valorDigitado);
+           if (encontrado==null){
+               System.out.println("ERRO: Nao encontrei");
+               Menu.exibirMenu();
+           }else{
+               
+           }
+        }
+    }
+
 }
