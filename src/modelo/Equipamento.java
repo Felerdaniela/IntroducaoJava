@@ -21,6 +21,11 @@ public class Equipamento {
     private float valor;
     private ArrayList<ManutencaoModelo> listaManutencoes;
     
+    public Equipamento (){
+        this.listaManutencoes = new ArrayList<>();
+        
+    }
+    
     public ArrayList<ManutencaoModelo> getlistaManutencoes(){
         return this.listaManutencoes;
     }
